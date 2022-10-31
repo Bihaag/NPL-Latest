@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/ship.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="heading">Select a Plan</h1>
+    <div class="con">
+        <div class="priceCon">
+            <img src="../Images/Untitled-11.png" alt="" class="lev">
+            <h2 class="silver">Silver</h2>
+            <div class="desc">
+                <span>
+                    <p>✅Weights access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>❌Cardio access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>❌VIP gym</p>
+                </span>
+                <hr>
+            </div>
+            <div class="price">
+                <p><sup>R</sup>1000<sub>/Year</sub></p>
+            </div>
+            <div class="buy">
+                <a href="#form" onclick="price = 1000/10;"><button class="silv">Purchase</button></a>
+            </div>
+        </div>
+        <div class="priceCon">
+            <img src="../Images/gold.png" class="lev">
+            <h2 class="gold">Gold</h2>
+            <div class="desc">
+                <span>
+                    <p>✅ Weights access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>✅ Cardio access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>❌ VIP gym</p>
+                </span>
+                <hr>
+            </div>
+            <div class="price">
+                <p><sup>R</sup>1500<sub>/Year</sub></p>
+            </div>
+            <div class="buy">
+                <a href="#form" onclick="price = 1500/10;"><button class="goldb">Purchase</button></a>
+            </div>
+        </div>
+        <div class="priceCon">
+            <img src="../Images/plati.png" alt="" class="lev">
+            <h2 class="plat">Platinum</h2>
+            <div class="desc">
+                <span>
+                    <p>✅ Weights access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>✅ Cardio access</p>
+                </span>
+                <hr>
+                <span>
+                    <p>✅ VIP gym</p>
+                </span>
+                <hr>
+            </div>
+            <div class="price">
+                <p><sup>R</sup>2500<sub>/Year</sub></p>
+            </div>
+            <div class="buy">
+                <a href="#form" onclick="price = 2500/10;"><button class="plati">Purchase</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="form" id="form">
+        <h2 style="text-align: centre;">Fill your details</h2>
+        <div class="colone">
+            <div class="box">
+                <label for="name">
+                    First name
+                </label>
+                <input type="text" id="name" placeholder="Enter your first name">
+            </div>
+            <div class="box">
+                <label for="surname">
+                    Surname
+                </label>
+                <input type="text" id="surname" placeholder="Enter your surname">
+            </div>
+        </div>
+        <img src="../Images/icons8-user-100.png" alt="" id="ppic">
+        <input type="file" name="img" id="imgpicker" accept="image/*" onchange="encodeImageFileAsURL(this, 'ppic')">
+        <button id="sub">Confirm</button>
+
+        <div class="payup">
+            <div id="smart-button-container">
+                <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function encodeImageFileAsURL(element, id) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                pic = reader.result
+                document.getElementById(id).src = reader.result;
+            }
+            reader.readAsDataURL(file);
+            document.getElementById("sub").style.display = "block"
+        }
+
+        var buttons = document.getElementsByClassName("buy")
+        level = ""
+        name = ""
+        surname = ""
+        pic = ""
+
+        for (i in buttons) {
+            buttons[i].onclick = function () {
+                level = this.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+            }
+        }
+
+        document.getElementById("sub").onclick = function () {
+            name = document.getElementById("name").value
+            surname = document.getElementById("surname").value
+
+            if (name == "" || surname == "" || pic == "") {
+                alert("please make sure you completed the form")
+            }
+            else {
+                $(".payup").css("display", "flex")
+            }
+
+        }
+    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD"
+        data-sdk-integration-source="button-factory"></script>
+    <script>
+        function initPayPalButton() {
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'paypal',
+
+                },
+
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ "amount": { "currency_code": "USD", "value": price } }]
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (orderData) {
+
+                        // Full available details
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                        // Show a success message within this page, e.g.
+                        const element = document.getElementById('paypal-button-container');
+                        element.innerHTML = '';
+                        element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                        $.ajax({
+                            url: "https://gymapi2022.azurewebsites.net/api/Membership/InsertMembership",
+                            type: "post",
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({
+                                Email: sessionStorage.getItem("email"),
+                                Name: name,
+                                Surname: surname,
+                                Picture: pic,
+                                level: level
+                            }),
+                            success: function (response) {
+                                console.log(response)
+                                alert("Card created")
+                            },
+                            error: function () {
+                                console.log(666);
+                            }
+                        });
+                        // Or go to another URL:  actions.redirect('thank_you.html');
+
+                    });
+                },
+
+                onError: function (err) {
+                    console.log(err);
+                }
+            }).render('#paypal-button-container');
+        }
+        initPayPalButton();
+    </script>
+</body>
+
+</html>

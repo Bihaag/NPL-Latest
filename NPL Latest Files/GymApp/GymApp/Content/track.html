@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/track.css">
+    <link type="text/css" rel="stylesheet" href="../Css/lightslider.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="lightslider.js"></script>
+    <title>Document</title>
+</head>
+
+<body onload="populate()">
+    <h5>Progress Tracker</h5>
+    <div class="cycleCon">
+        <ul id="lightSlider">
+            <li>
+                <div class="cycle one">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="first">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy1" onchange="encodeImageFileAsURL(this, 'first')" accept="image">
+                    <h1>cycle 1</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p>
+                        </p>
+                    </div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle two">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="second">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy2" onchange="encodeImageFileAsURL(this, 'second')" accept="image">
+                    <h1>cycle 2</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle three">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="third">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy3" onchange="encodeImageFileAsURL(this, 'third')" accept="image">
+                    <h1>cycle 3</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle four">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="fourth">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy4" onchange="encodeImageFileAsURL(this, 'fourth')" accept="image">
+                    <h1>cycle 4</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="fill"></div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle five">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="fifth">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy5" onchange="encodeImageFileAsURL(this, 'fifth')" accept="image">
+                    <h1>cycle 5</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="fill"></div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle six">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="sixth">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy6" onchange="encodeImageFileAsURL(this, 'sixth')" accept="image">
+                    <h1>cycle 6</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="fill"></div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Submit</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cycle seven">
+                    <img src="../Images/bodybuilder-g03ac14d60_640.png" alt="" id="seventh">
+                    <h3>upload your image -> &nbsp;</h3>
+                    <input type="file" id="cy7" onchange="encodeImageFileAsURL(this, 'seventh')" accept="image">
+                    <h1>cycle 7</h1>
+                    <h2>Comments</h2>
+                    <div class="comCon">
+                        <p></p>
+                    </div>
+                    <div class="next">
+                        <button class="glow-on-hover" type="button">Next</button>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lightSlider").lightSlider();
+        });
+        payload = {
+            email: sessionStorage.getItem("email"),
+            comment:"",
+            cycle: "",
+            picture: ""
+        }
+
+        function encodeImageFileAsURL(element, id) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                console.log(reader.result)
+                payload.picture = reader.result;
+                document.getElementById(id).src = reader.result;
+            }
+            reader.readAsDataURL(file);
+            document.getElementById(id).nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "flex"
+        }
+
+        btnNodes = document.getElementsByClassName("glow-on-hover")
+
+        for (i in btnNodes) {
+            btnNodes[i].onclick = function () {
+                this.parentElement.parentElement.parentElement.nextElementSibling.children[0].style.pointerEvents = "all"
+                this.parentElement.parentElement.parentElement.nextElementSibling.children[0].style.opacity = "1"
+                this.style.display = "none"
+                this.parentElement.parentElement.style.pointerEvents = "none"
+                this.parentElement.nextElementSibling.style.background = "#41d63c"
+                this.parentElement.parentElement.style.border = "solid #3aeb34 2px"
+                var data = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML
+                payload.cycle = data
+                console.log(payload)
+                $.ajax({
+                    url: "https://gymapi2022.azurewebsites.net/api/Progress/InsertProgress",
+                    type: "post",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(payload),
+                    success: function (response) {
+                        console.log(response)
+                    },
+                    error: function () {
+                        console.log(666);
+                    }
+                });
+            }
+        }
+
+        function populate (){
+            $.ajax({
+                url: "https://gymapi2022.azurewebsites.net/api/Progress/GetProgress",
+                    type: "post",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(sessionStorage.getItem("email")),
+                    success: function (response) {
+                        console.log(response)
+                        nodes = document.getElementsByClassName("cycle")
+                        for(i in response){
+                            nodes[i].children[0].src = response[i].pic
+                            nodes[i].children[5].children[0].innerHTML = response[i].comments
+                            nodes[i].style.pointerEvents = "none"
+                            nodes[i].style.opacity = "1"
+                            if(response.length < 7){
+                                nodes[i].parentElement.nextElementSibling.children[0].style.pointerEvents = "all"
+                                nodes[i].parentElement.nextElementSibling.children[0].style.opacity = "1"
+                            }
+                        }
+                    },
+                    error: function () {
+                        console.log(666);
+                    }
+                });
+        }
+
+
+
+    </script>
+</body>
+
+</html>

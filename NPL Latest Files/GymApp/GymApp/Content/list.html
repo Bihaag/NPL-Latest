@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/list.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Css/lightslider.css" />
+    <script src="lightslider.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Your Exercises</h3>
+    <div class="over" id="over">
+
+    </div>
+    <h3 id="sel">Select an excerise</h3>
+    <div class="con">
+        <ul id="lightSlider">
+            <li>
+                <div class="slide">
+                    <img src="../Images/ezgif-2-bf746f1172.gif" alt="">
+                    <div class="desc">
+                        <h1>ShoulderCurl</h1>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo repellat ab corrupti ipsa.</p>
+                        <div class="but">
+                            <button class="add">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slide">
+                    <img src="../Images/ezgif-2-42a983ba3a.gif" alt="">
+                    <div class="desc">
+                        <h1>Curl</h1>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo repellat ab corrupti ipsa
+                            alias.</p>
+                        <div class="but">
+                            <button class="add" id="add">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slide">
+                    <img src="../Images/ezgif-2-711316110e.gif" alt="">
+                    <div class="desc">
+                        <h1>HammerCurl</h1>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo repellat ab corrupti ipsa
+                            alias.</p>
+                        <div class="but">
+                            <button class="add">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slide">
+                    <img src="../Images/ezgif-2-bf746f1172.gif" alt="">
+                    <div class="desc">
+                        <h1>bobJumping</h1>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo repellat ab corrupti ipsa
+                            molestiae dignissimos.</p>
+                        <div class="but">
+                            <button class="add">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <button id="create">
+        <img src="../Images/icons8-create-50.png" alt="">
+        <h2>Create Playlist</h2>
+    </button>
+    <script>
+        $(document).ready(function () {
+            $("#lightSlider").lightSlider();
+        });
+
+        function hide(ids) {
+            document.getElementById(ids).style.display = "none";
+            selection--;
+            if (selection < 3) {
+                document.getElementById("over").style.backgroundColor = "white";
+            }
+            if (selection < 12) {
+                for (i in document.getElementsByClassName("add")) {
+                    document.getElementsByClassName("add")[i].disabled = false
+                }
+            }
+            delete sleObj[ids];
+            console.log(sleObj)
+        }
+
+        var selection = 0;
+
+        var p = 0;
+
+        sleObj ={};
+        Arrpay = [];
+
+        for (i in document.getElementsByClassName("add")) {
+            document.getElementsByClassName("add")[i].onclick = function () {
+                temp = this.parentElement.parentElement.parentElement.children[0];
+                $("#over").append(`
+                    <div class="slide n" id=${this.parentElement.previousElementSibling.previousElementSibling.innerHTML + p}>
+                        <div class = "x" onclick = hide("${this.parentElement.previousElementSibling.previousElementSibling.innerHTML + p}")>X</div>
+                        <img src=${temp.src} alt="">
+                        <div class="desc">
+                            <h4>${this.parentElement.previousElementSibling.previousElementSibling.innerHTML}</h4>
+                        </div>
+                    </div>
+                `);
+                var tempId = this.parentElement.previousElementSibling.previousElementSibling.innerHTML+p;
+                sleObj[tempId] = temp.src;
+                Arrpay.push(temp.src)
+                console.log(sleObj);
+                console.log(Arrpay)
+                p++
+                selection++
+                if (selection >= 3) {
+                    document.getElementById("over").style.backgroundColor = "#84ee9f"
+                }
+                if (selection == 12) {
+                    for (i in document.getElementsByClassName("add")) {
+                        document.getElementsByClassName("add")[i].disabled = true
+                    }
+                }
+            }
+        }
+
+        document.getElementById("create").onclick = function () {
+            if (selection < 3) {
+                alert("You need a minimum of 3 exercises")
+            }
+            else if (selection >= 3 && selection <= 12){
+                $.ajax({
+                    url: "https://gymapi2022.azurewebsites.net/api/Workout/InsertWorkouts",
+                    type: "post",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({email:sessionStorage.getItem("email"),
+                        picture: Arrpay
+                    }),
+                    success: function (response) {
+                        console.log(response)
+                        alert("exercises added to cloud")
+                    },
+                    error: function () {
+                        console.log(666);
+                    }
+                });
+            }
+        }
+
+    </script>
+</body>
+
+</html>

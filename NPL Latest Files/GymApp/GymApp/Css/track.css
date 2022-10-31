@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+
+body{
+    background-color: #161616;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cycleCon{
+    width: 95vw;
+    background-color: rgba(240, 248, 255, 0.541);
+    height: 95vh;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+
+.cycle{
+    height: 90vh;
+    width: 500px;
+    background-color: #161616;
+    border: solid rgb(201, 42, 42) 2px;
+    margin: 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    color: rgb(209, 201, 156);
+    box-shadow: 0px 2px 36px 10px rgba(0,0,0,0.58);
+}
+
+.cycle img{
+    width: 496px;
+    height: 496px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: solid black 2px;
+}
+
+h1{
+    margin: 5px;
+    margin-top: 3px;
+    font-size: 40px;
+    position: relative;
+    top: -555px;
+    z-index: 10;
+    width: 50%;
+    backdrop-filter: blur(5px);
+    border-radius: 90%;
+    text-shadow:
+    3px 3px 0 rgb(255, 255, 255),
+  -1px -1px 0 rgb(255, 255, 255),  
+   1px -1px 0 rgb(255, 255, 255),
+   -1px 1px 0 rgb(255, 255, 255),
+    1px 1px 0 rgb(255, 255, 255);
+    color: black;
+}
+
+input{
+    margin-top: 7px;
+    margin-bottom: 7px;
+    border: none;
+    position: relative;
+    left: 40px;
+}
+
+.comCon{
+    width: 80%;
+    border: solid black 0.1px;
+    overflow-y: auto;
+    height: 150px;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+h2{
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.next{
+    width: 120px;
+    height: 35px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 175px;
+}
+
+h3{
+    margin-top: 10px;
+    font-weight: 300;
+    width: 100%;
+}
+
+h5{
+    font-size: 40px;
+    margin-top: 5px;
+    color: rgb(201, 42, 42);
+}
+
+.glow-on-hover {
+    width: 200px;
+    height: 35px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 13s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active{
+    color: #000
+}
+
+.glow-on-hover:active:after{
+    background: transparent;
+}
+
+.glow-on-hover:hover:before{
+    opacity: 1;
+}
+
+.glow-on-hover:after{
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.comCon::-webkit-scrollbar{
+    width: 10px;
+    background-color: #161616;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: rgb(201, 42, 42);;
+    border-radius: 20px;
+}
+
+h2,.comCon, .next{
+    position: relative;
+    top: -50px;
+}
+
+.next{
+    z-index: 1;
+    top: -30px;
+}
+
+.fill{
+    height: 90px;
+    background-color: rgb(201, 42, 42);;
+    width: 495px;
+    z-index: 0;
+    position: absolute;
+    top: 805px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.arrow-right {
+    width: 0; 
+    height: 0; 
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid #111;
+    position: relative;
+    left: -10px;
+    z-index: 0;
+}
+
+.two, .three, .four, .five, .six, .seven{
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.next{
+    display: none;
+}

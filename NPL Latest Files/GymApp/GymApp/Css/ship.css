@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    background-color: #161616;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.heading{
+    color: white;
+    margin-bottom: 50px;
+}
+
+.con{
+    display: flex;
+    gap: 45px;
+}
+
+.priceCon{
+    width: 300px;
+    height: 630px;
+    background-color: aliceblue;
+    border-radius: 15px;
+    border: solid white 1px;
+}
+
+.desc{
+    padding: 25px;
+    gap: 10px;
+}
+
+hr{
+    margin: 9px;
+    opacity: 0.5;
+}
+
+.priceCon img{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.price{
+    font-size: 40px;
+}
+
+sup, sub{
+    font-size: 20px;
+}
+
+.priceCon button{
+    padding: 0.6rem 3rem;
+    border-radius: 20px;
+    border: none;
+    margin-top: 25px;
+    background-color: rgb(93, 90, 95);
+}
+
+.priceCon button:hover{
+    cursor: pointer;
+}
+
+.silver{
+    color: rgb(75, 75, 75);
+}
+
+.gold{
+    color: rgb(212, 181, 0);
+}
+
+.goldb {
+    color: gold;
+}
+
+.plat{
+    color: #a1a1a1;
+}
+
+span span{
+    display: inline;
+}
+
+.form{
+    background-color: white;
+    width: 1000px;
+    height: 400px;
+    margin-top: 150px;
+    text-align: justify;
+    padding: 25px;
+    margin-bottom: 50px;
+}
+
+input, label {
+    display:block;
+}
+
+.colone{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+input{
+    width: 400px;
+    margin-right: 90px;
+    height: 30px;
+    padding: 10px;
+}
+
+#imgpicker{
+    width: 200px;
+    height: 40px;
+}
+
+#ppic{
+    width: 200px;
+    height: 200px;
+    border: solid grey 2px;
+    margin-top: 15px;
+}
+
+.lev{
+    width: 300px;
+    height: 300px;
+}
+
+.plati{
+    color: palevioletred;
+}
+
+.silv{
+    color: white
+}
+
+h2{
+    margin-bottom: 10px;
+}
+
+#sub{
+    position: relative;
+    left: 750px;
+    padding: 0.6rem 3rem;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(226, 46, 46);
+    bottom: 25px;
+    color: white;
+    display: none;
+}
+
+#sub:hover{
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background-color: rgb(69, 206, 65);
+}
+
+.priceCon:hover{
+    transform: scale(1.1);
+    transition-duration: 0.7s;
+}
+
+.payup{
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 1000px;
+    bottom: 173px;
+    display: none;
+}

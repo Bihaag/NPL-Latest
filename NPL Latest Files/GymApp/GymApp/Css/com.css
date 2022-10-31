@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+html {
+    font-family: "Roboto", sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: #161616;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.con{
+    background-color: #fff;
+    width: 1000px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+#lightSlider{
+    margin-top:10px;
+}
+
+.slide{
+    width: 310px;
+    height: 380px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 10px;
+    border: solid black 2px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.slide p{
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 5px;
+}
+
+.cardPic{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 305px;
+    height: 305px;
+    margin-bottom: 5px;
+}
+
+.slide:hover{
+    cursor: pointer;
+    background-color: #e31c25;
+    border: solid white 4px;
+}
+
+.slide:hover .cardPic{
+    transform: scale(1.05);
+    transition-duration: 1s;
+}
+
+h1{
+    color: #e31c25;
+}
+
+h5{
+    margin-top: 10px;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .slide{
+        width: 150px;
+        height: 180px;  
+    }
+
+    .cardPic{
+        width: 100px;
+        height: 100px; 
+    }
+
+    .slide p{
+        font-size: 10px;
+    }
+
+    .con{
+        width: 500px;
+    }
+
+    h5{
+        font-size: 10px;
+    }
+}
+
+.textCon{
+    width: 65%;
+}
+
+textarea{
+    height: 300px;
+    width: 45vw;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+h6{
+    color: #e31c25;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+#res{
+    display: none;
+}
+
+button{
+    border: none;
+    width: 90px;
+    height: 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+h3{
+    color: #fff;
+}

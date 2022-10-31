@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/com.css">
+    <link type="text/css" rel="stylesheet" href="../Css/lightslider.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="lightslider.js"></script>
+    <title>Document</title>
+</head>
+
+<body onload="populate()" id="b">
+    <h1 id="p">Progression Reports</h1>
+    <div class="con">
+        <ul id="lightSlider">
+            <li>
+                <div class="slide" id="p1" onclick="setActive('p1')">
+                    <img src="../images/1st dude.jpg" alt="" class="cardPic">
+                    <p>David@gamil.com</p>
+                    <h5>cycle 1</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <h6>Enter your comment</h6>
+    <h3 id="res">You are responding to:</h3>
+    <div class="writeCon">
+        <textarea name="tex" id="area" cols="30" rows="10" placeholder="Enter your comment here">
+
+        </textarea>
+    </div>
+    <button onclick="sub()">Submit</button>
+    <div class="x" id="x"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lightSlider").lightSlider();
+        });
+
+        var temp = 'x';
+
+        payload = {
+            email: "",
+            comment: "",
+            cycle: ""
+        }
+
+        function setActive(id) {
+            document.getElementById(temp).style.backgroundColor = "white";
+            temp = id;
+            document.getElementById(id).style.backgroundColor = "#e31c25";
+            document.getElementById("res").style.display = "block"
+            document.getElementById("res").innerHTML = "You are responding to: &nbsp;" + document.getElementById(id).children[1].innerHTML + "&nbsp;(" + document.getElementById(id).children[2].innerHTML + ")";
+            payload.email = document.getElementById(id).children[1].innerHTML;
+            payload.cycle = document.getElementById(id).children[2].innerHTML;
+        }
+
+        function clean() {
+            document.getElementById("area").value = "";
+        }
+        clean();
+
+        function sub() {
+            payload.comment = document.getElementById("area").value
+            if (payload.comment == "") {
+                alert("please write a comment")
+            }
+            else {
+                console.log(JSON.stringify(payload))
+                $.ajax({
+                    url: "https://gymapi2022.azurewebsites.net/api/Progress/UpdateProgress",
+                type: "post",
+                dataType: 'json',
+                data : JSON.stringify(payload),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    console.log(response)
+                    location.reload();
+                },
+                error: function () {
+                    console.log(666);
+                }
+            });
+            }
+
+        }
+
+        function populate() {
+            $.ajax({
+                url: "https://gymapi2022.azurewebsites.net/api/Progress/GetProgressWhereNull",
+                type: "post",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    console.log(response)
+                    for (i in response) {
+                        $("#lightSlider").append(`
+                        <li>
+                            <div class="slide" id="s${i}" onclick="setActive('s${i}')">
+                                <img src="${response[i].pic}" alt="" class="cardPic">
+                                <p>${response[i].Email}</p>
+                                <h5>${response[i].cycle}</h5>
+                            </div>
+                        </li>
+                        `)
+                    }
+
+                    $("#lightSlider").lightSlider();
+                },
+                error: function () {
+                    console.log(666);
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>
